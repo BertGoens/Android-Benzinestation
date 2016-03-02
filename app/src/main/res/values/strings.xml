@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">BertGoens_Benzinestation</string>
+    <string name="start">Start</string>
+    <string name="stop">Stop</string>
+    <string name="Afrekenen">Afrekenen</string>
+    <string name="Stop">Stop</string>
+    <string name="Nul">0</string>
+    <string name="EUR">EUR</string>
+    <string name="Liter">Liter</string>
+</resources>
