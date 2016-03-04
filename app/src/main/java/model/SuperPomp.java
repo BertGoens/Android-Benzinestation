@@ -4,6 +4,6 @@ package model;
 public class SuperPomp extends BenzinepompBase {
 
     public SuperPomp() {
-        super(1.1, PompType.Super, 2);
+        super(1.1, PompType.Super, 2, null);
     }
 }

@@ -1,4 +1,5 @@
-package model;/* Created by BertGoens */
+package model;
+/* Created by BertGoens */
 
 public abstract class BenzinepompBase implements Benzinepomp {
 
@@ -6,16 +7,17 @@ public abstract class BenzinepompBase implements Benzinepomp {
     private PompType _type;
     private int _tankNummer;
     private int _klantLitersGetankt;
+    private Integer _imageId;
 
     public BenzinepompBase() {
         this._klantLitersGetankt = 0;
-        //Voor verdere subklasses
     }
 
-    public BenzinepompBase(double prijs, PompType type, int tankNummer) {
+    public BenzinepompBase(double prijs, PompType type, int tankNummer, Integer imageId) {
         this._prijsPerLiter = prijs;
         this._type = type;
         this._tankNummer = tankNummer;
+        this._imageId = imageId;
     }
 
     @Override
@@ -36,6 +38,11 @@ public abstract class BenzinepompBase implements Benzinepomp {
     @Override
     public int getKlantLitersGetankt() {
         return _klantLitersGetankt;
+    }
+
+    @Override
+    public Integer getImageId() {
+        return _imageId;
     }
 
     @Override

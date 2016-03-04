@@ -6,6 +6,7 @@ public interface Benzinepomp {
     PompType getType();
     int getTankNummer();
     int getKlantLitersGetankt();
+    Integer getImageId();
     double getTotalePrijs();
 
     int MAXIMUM_LITERS = 50;

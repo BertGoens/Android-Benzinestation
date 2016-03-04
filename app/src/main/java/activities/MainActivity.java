@@ -1,16 +1,18 @@
-package bert.bertgoens_benzinestation.activities;
+package activities;
 
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import bert.bertgoens_benzinestation.R;
 import broadcastreciever.KasticketReciever;
@@ -29,6 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private BenzinepompAsyncTask dieselPompTask;
     private BenzinepompAsyncTask superPompTask;
 
+    private List<Kasticket> _kasticketten = new ArrayList<>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +43,16 @@ public class MainActivity extends AppCompatActivity {
 
         final TextView tvDieselLiters = (TextView) findViewById(R.id.tv_diesel_liters);
         final TextView tvSuperLiters = (TextView) findViewById(R.id.tv_super_liters);
+
+        final ImageView imgDiesel = (ImageView) findViewById(R.id.img_diesel);
+        if (dieselPomp.getImageId() != null) {
+            imgDiesel.setImageResource(dieselPomp.getImageId());
+        }
+
+        final ImageView imgSuper = (ImageView) findViewById(R.id.img_super);
+        if (superPomp.getImageId() != null) {
+            imgDiesel.setImageResource(superPomp.getImageId());
+        }
 
         final ProgressBar pgbDiesel = (ProgressBar) findViewById(R.id.pgb_diesel);
         final ProgressBar pgbSuper = (ProgressBar) findViewById(R.id.pgb_super);
@@ -130,6 +144,8 @@ public class MainActivity extends AppCompatActivity {
                 pomp.getTotalePrijs(), //Bedrag
                 pomp.getType(), //Diesel
                 pomp.getKlantLitersGetankt());
+
+        _kasticketten.add(kasticket);
 
         Intent intent = new Intent();
         intent.setClass(MainActivity.this, KasticketReciever.class);
