@@ -1,7 +1,10 @@
 package model;
 /* Created by BertGoens */
 
-public abstract class BenzinepompBase implements Benzinepomp {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+public abstract class PompBase implements Pomp, Parcelable {
 
     private double _prijsPerLiter;
     private PompType _type;
@@ -9,11 +12,11 @@ public abstract class BenzinepompBase implements Benzinepomp {
     private int _klantLitersGetankt;
     private Integer _imageId;
 
-    public BenzinepompBase() {
+    public PompBase() {
         this._klantLitersGetankt = 0;
     }
 
-    public BenzinepompBase(double prijs, PompType type, int tankNummer, Integer imageId) {
+    public PompBase(double prijs, PompType type, int tankNummer, Integer imageId) {
         this._prijsPerLiter = prijs;
         this._type = type;
         this._tankNummer = tankNummer;
@@ -55,4 +58,35 @@ public abstract class BenzinepompBase implements Benzinepomp {
     public void setKlantLitersGetankt(int klantLitersGetankt) {
         this._klantLitersGetankt = klantLitersGetankt;
     }
+
+
+    /* PARCELABLE */
+    protected PompBase(Parcel in) {
+        _prijsPerLiter = in.readDouble();
+        _type = (PompType) in.readValue(PompType.class.getClassLoader());
+        _tankNummer = in.readInt();
+        _klantLitersGetankt = in.readInt();
+        _imageId = in.readByte() == 0x00 ? null : in.readInt();
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeDouble(_prijsPerLiter);
+        dest.writeValue(_type);
+        dest.writeInt(_tankNummer);
+        dest.writeInt(_klantLitersGetankt);
+        if (_imageId == null) {
+            dest.writeByte((byte) (0x00));
+        } else {
+            dest.writeByte((byte) (0x01));
+            dest.writeInt(_imageId);
+        }
+    }
+
+
 }

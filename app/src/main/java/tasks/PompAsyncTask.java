@@ -1,21 +1,19 @@
 package tasks;/* Created by BertGoens */
 
 import android.os.AsyncTask;
-import android.util.Log;
 
-import model.Benzinepomp;
-import model.BenzinepompBase;
+import model.Pomp;
 
 //Params Progress Result
-public class BenzinepompAsyncTask extends AsyncTask<BenzinepompAsyncTaskParams, Void, Void> {
+public class PompAsyncTask extends AsyncTask<PompAsyncTaskParams, Void, Void> {
 
-    BenzinepompAsyncTaskParams bp;
+    PompAsyncTaskParams bp;
 
     @Override
-    protected Void doInBackground(BenzinepompAsyncTaskParams... params) {
+    protected Void doInBackground(PompAsyncTaskParams... params) {
         bp = params[0];
 
-        for (int i = 1; i < Benzinepomp.MAXIMUM_LITERS +1; i++) {
+        for (int i = 1; i < Pomp.MAXIMUM_LITERS +1; i++) {
             //Als thread cancelled(true) is moet je manueel uit je loop springen
             if(isCancelled()) break;
 

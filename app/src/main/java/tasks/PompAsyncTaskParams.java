@@ -3,20 +3,20 @@ package tasks;/* Created by BertGoens */
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import model.BenzinepompBase;
+import model.PompBase;
 
-public class BenzinepompAsyncTaskParams {
+public class PompAsyncTaskParams {
 
-    private BenzinepompBase benzinepomp;
+    private PompBase benzinepomp;
     private ProgressBar _pgbLitersGetankt;
     private TextView _tvLitersGetankt;
     private TextView _tvTotalePrijs;
 
-    //De parameters voor BenzinepompAsyncTask
-    public BenzinepompAsyncTaskParams(BenzinepompBase benzinepomp,
-                                      ProgressBar pgbLitersGetankt,
-                                      TextView tvLitersGetankt,
-                                      TextView tvTotalePrijs)
+    //De parameters voor PompAsyncTask
+    public PompAsyncTaskParams(PompBase benzinepomp,
+                               ProgressBar pgbLitersGetankt,
+                               TextView tvLitersGetankt,
+                               TextView tvTotalePrijs)
     {
         this.benzinepomp = benzinepomp;
         this._pgbLitersGetankt = pgbLitersGetankt;
@@ -24,7 +24,7 @@ public class BenzinepompAsyncTaskParams {
         this._tvTotalePrijs = tvTotalePrijs;
     }
 
-    public BenzinepompBase getBenzinepomp() {
+    public PompBase getBenzinepomp() {
         return benzinepomp;
     }
 

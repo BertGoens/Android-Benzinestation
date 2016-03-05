@@ -1,7 +1,7 @@
 package model;
 /* Created by BertGoens */
 
-public interface Benzinepomp {
+public interface Pomp {
     double getPrijsPerLiter();
     PompType getType();
     int getTankNummer();

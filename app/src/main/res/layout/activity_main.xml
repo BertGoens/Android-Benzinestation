@@ -1,184 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+
     android:layout_height="match_parent"
-    android:paddingLeft="@dimen/activity_horizontal_margin"
-    android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:orientation="horizontal"
+    android:padding="2dip"
+    android:weightSum="1.0"
     tools:context="bert.bertgoens_benzinestation.MainActivity">
 
-    <RelativeLayout
-        android:layout_width="160dp"
-        android:layout_height="match_parent"
-        android:id="@+id/rl_left"
-        android:layout_marginRight="10dp">
+    <ScrollView
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5">
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/Nul"
-            android:id="@+id/tv_diesel_prijs"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/EUR"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/tv_diesel_prijs"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/Nul"
-            android:layout_marginRight="10dp"
-            android:id="@+id/tv_diesel_liters"
-            android:layout_below="@+id/tv_diesel_prijs"
-            android:layout_alignParentStart="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/Liter"
-            android:layout_below="@+id/tv_diesel_prijs"
-            android:layout_toEndOf="@+id/tv_diesel_liters"/>
-
-        <ImageView
+        <FrameLayout
+            android:id="@+id/fragment_dieselpomp"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:id="@+id/img_diesel"
-            android:layout_below="@+id/tv_diesel_liters"
-            android:layout_alignParentStart="true"
-            android:background="#ffe7e7"/>
-
-        <ProgressBar
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/pgb_diesel"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:max="50"
-            />
+            >
+        </FrameLayout>
+    </ScrollView>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/start"
-            android:id="@+id/btn_diesel_start"
-            android:layout_below="@+id/pgb_diesel"
-            android:layout_alignParentStart="true"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Stop"
-            android:id="@+id/btn_diesel_stop"
-            android:layout_below="@+id/btn_diesel_start"
-            android:layout_alignParentStart="true"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Afrekenen"
-            android:id="@+id/btn_diesel_afrekenen"
-            android:layout_below="@+id/btn_diesel_stop"
-            android:layout_alignParentStart="true"/>
-    </RelativeLayout>
-
-    <RelativeLayout
-        android:layout_width="200dp"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_toEndOf="@+id/rl_left"
-        android:id="@+id/rl_right"
-        android:layout_marginLeft="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/Nul"
-            android:id="@+id/tv_super_prijs"
-            android:layout_marginRight="10dp"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentStart="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/EUR"
-            android:layout_alignParentTop="true"
-            android:layout_toEndOf="@+id/tv_super_prijs"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/Nul"
-            android:layout_marginRight="10dp"
-            android:id="@+id/tv_super_liters"
-            android:layout_below="@+id/tv_super_prijs"
-            android:layout_alignParentStart="true"/>
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="@string/Liter"
-            android:layout_below="@+id/tv_super_prijs"
-            android:layout_toEndOf="@+id/tv_super_prijs"/>
-
-        <ImageView
+    <ScrollView
+        android:layout_width="0dip"
+        android:layout_height="wrap_content"
+        android:layout_weight="0.5">
+        <FrameLayout
+            android:id="@+id/fragment_superpomp"
             android:layout_width="match_parent"
-            android:layout_height="150dp"
-            android:id="@+id/img_super"
-            android:layout_below="@+id/tv_super_liters"
-            android:layout_alignParentStart="true"
-            android:background="#7ed6ff"/>
-
-        <ProgressBar
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/pgb_super"
-            android:layout_centerVertical="true"
-            android:layout_alignParentEnd="true"
-            android:max="50"
-            />
+            >
+        </FrameLayout>
+    </ScrollView>
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/start"
-            android:id="@+id/btn_super_start"
-            android:layout_below="@+id/pgb_super"
-            android:layout_alignParentStart="true"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Stop"
-            android:id="@+id/btn_super_stop"
-            android:layout_below="@+id/btn_super_start"
-            android:layout_alignParentStart="true"/>
-
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/Afrekenen"
-            android:id="@+id/btn_super_afrekenen"
-            android:layout_below="@+id/btn_super_stop"
-            android:layout_alignParentStart="true"/>
-    </RelativeLayout>
-</RelativeLayout>
+</LinearLayout>

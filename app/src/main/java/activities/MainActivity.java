@@ -1,150 +1,55 @@
 package activities;
 
 import android.content.Intent;
-import android.os.AsyncTask;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
-import android.widget.ProgressBar;
-import android.widget.TextView;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AppCompatActivity;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import bert.bertgoens_benzinestation.R;
 import broadcastreciever.KasticketReciever;
-import model.BenzinepompBase;
+import fragments.PompFragment;
+
 import model.DieselPomp;
 import model.Kasticket;
 import model.SuperPomp;
-import tasks.BenzinepompAsyncTask;
-import tasks.BenzinepompAsyncTaskParams;
 
-public class MainActivity extends AppCompatActivity {
-
-    private DieselPomp dieselPomp = new DieselPomp();
-    private SuperPomp superPomp = new SuperPomp();
-
-    private BenzinepompAsyncTask dieselPompTask;
-    private BenzinepompAsyncTask superPompTask;
+public class MainActivity extends AppCompatActivity implements PompFragment.AfrekenenListener {
 
     private List<Kasticket> _kasticketten = new ArrayList<>();
+    private DieselPomp dieselPomp = new DieselPomp();
+    private SuperPomp superPomp = new SuperPomp();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        final TextView tvDieselPrijs = (TextView) findViewById(R.id.tv_diesel_prijs);
-        final TextView tvSuperPrijs = (TextView) findViewById(R.id.tv_super_prijs);
+        PompFragment dieselFragment = new PompFragment();
+        Bundle args1 = new Bundle();
+        args1.putParcelable(PompFragment.Arguments.BENZINEPOMP, dieselPomp);
+        dieselFragment.setArguments(args1);
 
-        final TextView tvDieselLiters = (TextView) findViewById(R.id.tv_diesel_liters);
-        final TextView tvSuperLiters = (TextView) findViewById(R.id.tv_super_liters);
+        FragmentTransaction transaction1 = getSupportFragmentManager().beginTransaction();
+        transaction1.replace(R.id.fragment_dieselpomp, dieselFragment);
+        transaction1.addToBackStack(null);
+        transaction1.commit();
 
-        final ImageView imgDiesel = (ImageView) findViewById(R.id.img_diesel);
-        if (dieselPomp.getImageId() != null) {
-            imgDiesel.setImageResource(dieselPomp.getImageId());
-        }
+        PompFragment superFragment = new PompFragment();
+        Bundle args2 = new Bundle();
+        args2.putParcelable(PompFragment.Arguments.BENZINEPOMP, superPomp);
+        superFragment.setArguments(args2);
 
-        final ImageView imgSuper = (ImageView) findViewById(R.id.img_super);
-        if (superPomp.getImageId() != null) {
-            imgDiesel.setImageResource(superPomp.getImageId());
-        }
-
-        final ProgressBar pgbDiesel = (ProgressBar) findViewById(R.id.pgb_diesel);
-        final ProgressBar pgbSuper = (ProgressBar) findViewById(R.id.pgb_super);
-
-        final Button btnDieselStart = (Button) findViewById(R.id.btn_diesel_start);
-        final Button btnDieselStop = (Button) findViewById(R.id.btn_diesel_stop);
-        final Button btnDieselAfrekenen = (Button) findViewById(R.id.btn_diesel_afrekenen);
-
-        final Button btnSuperStart = (Button) findViewById(R.id.btn_super_start);
-        final Button btnSuperStop = (Button) findViewById(R.id.btn_super_stop);
-        final Button btnSuperAfrekeken = (Button) findViewById(R.id.btn_super_afrekenen);
-
-        btnDieselStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (dieselPompTask != null) {
-                    dieselPompTask.cancel(true);
-                    dieselPomp = new DieselPomp();
-                }
-
-                BenzinepompAsyncTaskParams params = new BenzinepompAsyncTaskParams(
-                        dieselPomp,
-                        pgbDiesel,
-                        tvDieselLiters,
-                        tvDieselPrijs);
-                dieselPompTask = new BenzinepompAsyncTask();
-                //Multi threaded
-                dieselPompTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR,params);
-            }
-        });
-
-        btnDieselStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (dieselPompTask != null) {
-                    dieselPompTask.cancel(true);
-                }
-            }
-        });
-
-        btnDieselAfrekenen.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                printKasticket(dieselPomp);
-            }
-        });
-
-        btnSuperStart.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (superPompTask != null) {
-                    superPompTask.cancel(true);
-                    superPomp = new SuperPomp();
-                }
-
-                BenzinepompAsyncTaskParams params = new BenzinepompAsyncTaskParams(
-                        superPomp,
-                        pgbSuper,
-                        tvSuperLiters,
-                        tvSuperPrijs
-                );
-
-                superPompTask = new BenzinepompAsyncTask();
-                //Multi threaded
-                superPompTask.executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, params);
-            }
-        });
-
-        btnSuperStop.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (superPompTask != null) {
-                    superPompTask.cancel(true);
-                }
-            }
-        });
-
-        btnSuperAfrekeken.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                printKasticket(superPomp);
-            }
-        });
+        FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
+        transaction2.replace(R.id.fragment_superpomp, superFragment );
+        transaction2.addToBackStack(null);
+        transaction2.commit();
     }
 
-    private void printKasticket(BenzinepompBase pomp) {
-        Kasticket kasticket = new Kasticket(new Date(), //Tank Datum
-                pomp.getTankNummer(),
-                pomp.getTotalePrijs(), //Bedrag
-                pomp.getType(), //Diesel
-                pomp.getKlantLitersGetankt());
-
+    @Override
+    public void afrekenen(Kasticket kasticket) {
         _kasticketten.add(kasticket);
 
         Intent intent = new Intent();
