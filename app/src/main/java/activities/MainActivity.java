@@ -5,22 +5,16 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import bert.bertgoens_benzinestation.R;
 import broadcastreciever.KasticketReciever;
 import fragments.PompFragment;
 
-import model.DieselPomp;
 import model.Kasticket;
-import model.SuperPomp;
+import model.pomp.DieselStrategy;
+import model.pomp.Pomp;
+import model.pomp.SuperStrategy;
 
 public class MainActivity extends AppCompatActivity implements PompFragment.AfrekenenListener {
-
-    private List<Kasticket> _kasticketten = new ArrayList<>();
-    private DieselPomp dieselPomp = new DieselPomp();
-    private SuperPomp superPomp = new SuperPomp();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,7 +23,7 @@ public class MainActivity extends AppCompatActivity implements PompFragment.Afre
 
         PompFragment dieselFragment = new PompFragment();
         Bundle args1 = new Bundle();
-        args1.putParcelable(PompFragment.Arguments.BENZINEPOMP, dieselPomp);
+        args1.putParcelable(PompFragment.Arguments.BENZINEPOMP, new Pomp(new DieselStrategy()));
         dieselFragment.setArguments(args1);
 
         FragmentTransaction transaction1 = getSupportFragmentManager().beginTransaction();
@@ -39,7 +33,7 @@ public class MainActivity extends AppCompatActivity implements PompFragment.Afre
 
         PompFragment superFragment = new PompFragment();
         Bundle args2 = new Bundle();
-        args2.putParcelable(PompFragment.Arguments.BENZINEPOMP, superPomp);
+        args2.putParcelable(PompFragment.Arguments.BENZINEPOMP, new Pomp(new SuperStrategy()));
         superFragment.setArguments(args2);
 
         FragmentTransaction transaction2 = getSupportFragmentManager().beginTransaction();
@@ -50,8 +44,6 @@ public class MainActivity extends AppCompatActivity implements PompFragment.Afre
 
     @Override
     public void afrekenen(Kasticket kasticket) {
-        _kasticketten.add(kasticket);
-
         Intent intent = new Intent();
         intent.setClass(MainActivity.this, KasticketReciever.class);
         intent.putExtra(KasticketReciever.IntentExtras.KASTICKKET, kasticket);

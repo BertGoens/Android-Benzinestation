@@ -1,4 +1,4 @@
-package model;
+package model.pomp;
 /* Created by BertGoens */
 
 public enum PompType {

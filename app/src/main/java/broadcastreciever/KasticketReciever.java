@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import model.Kasticket;
+import model.KasticketDB;
 
 public class KasticketReciever extends BroadcastReceiver {
 
@@ -23,6 +24,9 @@ public class KasticketReciever extends BroadcastReceiver {
         Bundle params = intent.getExtras();
 
         Kasticket kasticket = (Kasticket) params.get(IntentExtras.KASTICKKET);
+
+        //Bijhouden
+        KasticketDB.getInstance().getKastickets().add(kasticket);
 
         //Output
         Log.i("Kasticket", kasticket.toString());

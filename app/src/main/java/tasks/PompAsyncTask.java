@@ -1,8 +1,9 @@
-package tasks;/* Created by BertGoens */
+package tasks;
+/* Created by BertGoens */
 
 import android.os.AsyncTask;
 
-import model.Pomp;
+import util.Constants;
 
 //Params Progress Result
 public class PompAsyncTask extends AsyncTask<PompAsyncTaskParams, Void, Void> {
@@ -13,7 +14,7 @@ public class PompAsyncTask extends AsyncTask<PompAsyncTaskParams, Void, Void> {
     protected Void doInBackground(PompAsyncTaskParams... params) {
         bp = params[0];
 
-        for (int i = 1; i < Pomp.MAXIMUM_LITERS +1; i++) {
+        for (int i = 1; i < Constants.MAXIMUM_LITERS +1; i++) {
             //Als thread cancelled(true) is moet je manueel uit je loop springen
             if(isCancelled()) break;
 

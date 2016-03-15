@@ -1,9 +1,12 @@
-package model;/* Created by BertGoens */
+package model;
+/* Created by BertGoens */
 
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import java.util.Date;
+
+import model.pomp.PompType;
 
 public class Kasticket implements Parcelable {
     private Date datum;

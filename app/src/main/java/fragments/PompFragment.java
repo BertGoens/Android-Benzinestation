@@ -16,15 +16,14 @@ import android.widget.TextView;
 import java.util.Date;
 
 import bert.bertgoens_benzinestation.R;
-import model.PompBase;
-import model.DieselPomp;
+import model.pomp.Pomp;
 import model.Kasticket;
 import tasks.PompAsyncTask;
 import tasks.PompAsyncTaskParams;
 
 public class PompFragment extends Fragment {
 
-    private PompBase _pomp;
+    private Pomp _pomp;
     private PompAsyncTask _pompTask;
     private  AfrekenenListener _afrekenen;
 
@@ -48,7 +47,7 @@ public class PompFragment extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_benzinepomp, container, false);
 
-        _pomp = (PompBase) getArguments().get(Arguments.BENZINEPOMP);
+        _pomp = (Pomp) getArguments().get(Arguments.BENZINEPOMP);
 
         final TextView tvPrijs = (TextView) view.findViewById(R.id.tv_prijs);
         tvPrijs.setText(Double.toString(_pomp.getTotalePrijs()));
@@ -115,11 +114,6 @@ public class PompFragment extends Fragment {
         });
 
         return view;
-    }
-
-    private void refreshPomp() {
-
-
     }
 
     @Override

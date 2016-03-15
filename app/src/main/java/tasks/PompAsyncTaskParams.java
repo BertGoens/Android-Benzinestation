@@ -1,19 +1,20 @@
-package tasks;/* Created by BertGoens */
+package tasks;
+/* Created by BertGoens */
 
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import model.PompBase;
+import model.pomp.Pomp;
 
 public class PompAsyncTaskParams {
 
-    private PompBase benzinepomp;
+    private Pomp benzinepomp;
     private ProgressBar _pgbLitersGetankt;
     private TextView _tvLitersGetankt;
     private TextView _tvTotalePrijs;
 
     //De parameters voor PompAsyncTask
-    public PompAsyncTaskParams(PompBase benzinepomp,
+    public PompAsyncTaskParams(Pomp benzinepomp,
                                ProgressBar pgbLitersGetankt,
                                TextView tvLitersGetankt,
                                TextView tvTotalePrijs)
@@ -24,7 +25,7 @@ public class PompAsyncTaskParams {
         this._tvTotalePrijs = tvTotalePrijs;
     }
 
-    public PompBase getBenzinepomp() {
+    public Pomp getBenzinepomp() {
         return benzinepomp;
     }
 
